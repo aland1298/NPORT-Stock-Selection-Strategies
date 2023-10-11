@@ -23,7 +23,7 @@ public class Driver {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+//test
         while (true) {
             // Query CIK numbers from database
             List<Integer> cikList;
