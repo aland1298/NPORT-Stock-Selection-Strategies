@@ -31,7 +31,7 @@ public class Driver {
                 // Failed query, skip
                 logger.severe("Failed to query CIK numbers.");
                 return;
-            }//i
+            }
 
             if (cikList.isEmpty()) {
                 // No more CIKs to process
