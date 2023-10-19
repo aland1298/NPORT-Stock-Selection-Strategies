@@ -8,7 +8,8 @@
 - Published untested MySQL schema into **/sql_info
 
 **TODO:**
-1. Test Database schema
+1. Organize folder structure
+2. Test Database schema
 
 **Research Proposition:**
 
