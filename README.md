@@ -39,9 +39,14 @@ PROCESS:
 6. Results and Interpretation:
   - Present findings, including any statistical results.
   - Interpret the results to draw conclusions regarding the effectiveness of the equal-weighted portfolio strategy.
-
 7. Discussion and Implications:
   - Discuss the implications of findings.
   - Consider the limitations of methodology and potential areas for future research.
 
 9. Rinse and repeat with other strategies
+
+Database: v0.1
+- First draft of the database.
+- Currently Refactoring to split "FUND_INFO" into 3-month categories because everything eventually branches off into 3-month categories. As a result, we can then better query fund data and improve maintainability.
+
+
