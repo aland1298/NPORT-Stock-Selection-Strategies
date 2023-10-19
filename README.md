@@ -4,12 +4,13 @@
 
 **Current Happenings:** Data Collection (see process 1)
 
-**Recent Updates: **
+**Recent Updates:**
 - Published untested MySQL schema into **/sql_info
 
 **TODO:**
 1. Organize folder structure
 2. Test Database schema
+3. Upload updated code for updating the database
 
 **Research Proposition:**
 
