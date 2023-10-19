@@ -2,11 +2,11 @@
 
 Start Date: 10/04/2023
 
-Current Happenings: Data Collection
+Current Happenings: Data Collection (see process 1)
 
 TODO:
-1. Upload Database schema
-2. Create CMD
+1. (ETA 10/20) Refactor to split "FUND_INFO" into 3-month categories because everything eventually branches off into 3-month categories. As a result, we can then better query fund data and improve maintainability.
+2. (ETA 10/25) Update database and publish schema to repo
 
 Research Proposition:
 
@@ -44,9 +44,4 @@ PROCESS:
   - Consider the limitations of methodology and potential areas for future research.
 
 9. Rinse and repeat with other strategies
-
-Database: v0.1
-- First draft of the database.
-- Currently Refactoring to split "FUND_INFO" into 3-month categories because everything eventually branches off into 3-month categories. As a result, we can then better query fund data and improve maintainability.
-
 
