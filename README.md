@@ -5,12 +5,15 @@
 **Current Happenings:** Data Collection (see process 1)
 
 **Recent Updates:**
-- Published untested MySQL schema into **/sql_info
+- Published updated MySQL schema into **/sql_info
+- Created code for updating database with data
 
 **TODO:**
-1. Organize folder structure
-2. Test Database schema
-3. Upload updated code for updating the database
+1. Test code for updating database
+2. Remove default value data from inserting into database to save space
+3. Create throttle for pulling data from sec website (max 10/sec according to spec)
+4. Finish creating cmd for managing the program
+5. Create "How To" section
 
 **Research Proposition:**
 
