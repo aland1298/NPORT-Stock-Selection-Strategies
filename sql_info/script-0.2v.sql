@@ -14,13 +14,6 @@ create table derivative_type
     type    varchar(30) not null
 );
 
-create table fair_value_level
-(
-    level varchar(3) not null
-        constraint `PRIMARY`
-        primary key
-);
-
 create table form_type
 (
     type_id int auto_increment
@@ -126,7 +119,7 @@ create table gen_info
     series_id        varchar(100) null,
     fiscal_pd_end    date         null,
     reported         date         null,
-    is_final_filing  tinyint(1)   null,
+    is_final_filing  varchar(1)   null,
     constraint gen_info_nport_p_accession_number_fk
         foreign key (accession_number) references nport_p (accession_number)
             on update cascade on delete cascade
@@ -176,7 +169,7 @@ create table class_info
 (
     accession_number varchar(20) not null,
     month_type_id    int         not null,
-    class_id         int         not null,
+    class_id         varchar(10) not null,
     percent_return   double      not null,
     constraint `PRIMARY`
         primary key (accession_number, month_type_id, class_id),
@@ -216,40 +209,34 @@ create table open
             on update cascade on delete cascade
 );
 
-create table trade_type
-(
-    type varchar(5) not null
-        constraint `PRIMARY`
-        primary key
-);
-
 create table portfolio_info
 (
-    accession_number    varchar(20) not null
-        constraint `PRIMARY`
-        primary key,
-    cusip               varchar(9)  not null,
-    fair_value_level_id varchar(3)  not null,
-    issuer_name         varchar(50) not null,
-    issue_name          varchar(50) not null,
-    value_usd           double      not null,
-    percent_of_nav      double      not null,
-    trade_type_id       varchar(5)  not null,
-    asset_category      int         null,
-    issuer_category     int         not null,
-    lei                 varchar(20) null,
-    constraint portfolio_info_fair_value_level_level_fk
-        foreign key (fair_value_level_id) references fair_value_level (level)
-            on update cascade,
+    accession_number varchar(20) not null,
+    cusip            varchar(9)  not null,
+    fair_value_level varchar(3)  not null,
+    issuer_name      varchar(50) not null,
+    issue_name       varchar(50) not null,
+    value_usd        double      not null,
+    percent_of_nav   double      not null,
+    trade_type       varchar(5)  not null,
+    asset_category   varchar(25) null,
+    issuer_category  varchar(25) not null,
+    lei              varchar(20) not null,
+    investorCountry  varchar(25) null,
+    constraint `PRIMARY`
+        primary key (accession_number, cusip, lei),
     constraint portfolio_info_nport_p_accession_number_fk
         foreign key (accession_number) references nport_p (accession_number)
-            on update cascade on delete cascade,
-    constraint portfolio_info_trade_type_type_fk
-        foreign key (trade_type_id) references trade_type (type)
-            on update cascade
+            on update cascade on delete cascade
 );
 
 create index portfolio_info_category_type_type_id_fk
     on portfolio_info (asset_category);
+
+create index portfolio_info_fair_value_level_level_fk
+    on portfolio_info (fair_value_level);
+
+create index portfolio_info_trade_type_type_fk
+    on portfolio_info (trade_type);
 
 
