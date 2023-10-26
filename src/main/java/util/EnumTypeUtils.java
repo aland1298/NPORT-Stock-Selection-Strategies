@@ -1,6 +1,7 @@
 package util;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class EnumTypeUtils {
     /**
@@ -59,6 +60,7 @@ public class EnumTypeUtils {
     public interface EnumWithIdAndName {
         int getTypeId();
         String getName();
+
     }
 
     public enum FormType implements EnumWithIdAndName {
@@ -76,6 +78,60 @@ public class EnumTypeUtils {
             return typeId;
         }
 
+        public String getName() {
+            return name;
+        }
+    }
+
+    public enum CategoryType implements EnumWithIdAndName {
+        COMMODITY(1, "commodity"),
+        CREDIT(2, "credit"),
+        EQUITY(3, "equity"),
+        FOREIGN(4, "foreign"),
+        OTHER(5, "other");
+
+        private final int typeId;
+        private final String name;
+
+        CategoryType(int typeId, String name) {
+            this.typeId = typeId;
+            this.name = name;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public int getTypeId() {
+            return typeId;
+        }
+    }
+
+    public enum DerivativeType implements EnumWithIdAndName {
+        FORWARD(1, "forward"),
+        FUTURE(2, "future"),
+        OPTION(3, "option"),
+        SWAPTION(4, "swaption"),
+        SWAP(5, "swap"),
+        WARRANT(6, "warrant"),
+        OTHER(7, "other");
+
+        private final int typeId;
+        private final String name;
+
+        DerivativeType(int typeId, String name) {
+            this.typeId = typeId;
+            this.name = name;
+        }
+
+        @Override
+        public int getTypeId() {
+            return typeId;
+        }
+
+        @Override
         public String getName() {
             return name;
         }

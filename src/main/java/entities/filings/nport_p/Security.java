@@ -13,12 +13,21 @@ public class Security {
     private Double percentOfNAV;
     @JacksonXmlProperty(localName = "payoffProfile")
     private String tradeType;
-    private Short fairValLevel;
+    private String fairValLevel;
     private String assetCat;
     private AssetConditional assetConditional;
     private String issuerCat;
+    private String lei;
     @JacksonXmlProperty(localName = "invCountry")
     private String investorCountry;
+
+    public String getLei() {
+        return lei;
+    }
+
+    public void setLei(String lei) {
+        this.lei = lei;
+    }
 
     public Double getValUSD() {
         return valUSD;
@@ -44,11 +53,11 @@ public class Security {
         this.tradeType = tradeType;
     }
 
-    public Short getFairValLevel() {
+    public String getFairValLevel() {
         return fairValLevel;
     }
 
-    public void setFairValLevel(Short fairValLevel) {
+    public void setFairValLevel(String fairValLevel) {
         this.fairValLevel = fairValLevel;
     }
 

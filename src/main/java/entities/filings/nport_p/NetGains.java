@@ -1,6 +1,6 @@
 package entities.filings.nport_p;
 
-public class MonthsReturn {
+public class NetGains {
     private Double netRealizedGain;
     private Double netUnrealizedAppr;
 

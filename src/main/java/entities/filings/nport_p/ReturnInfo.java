@@ -3,42 +3,42 @@ package entities.filings.nport_p;
 import java.util.List;
 
 public class ReturnInfo {
-    private List<MonthlyTotReturn> monthlyTotReturns;
+    private List<MonthlyClassPercentReturns> monthlyClassPercentReturns;
     private MonthlyReturnCats monthlyReturnCats;
-    private MonthsReturn othMon1;
-    private MonthsReturn othMon2;
-    private MonthsReturn othMon3;
+    private NetGains othMon1;
+    private NetGains othMon2;
+    private NetGains othMon3;
 
-    public MonthsReturn getOthMon1() {
+    public NetGains getOthMon1() {
         return othMon1;
     }
 
-    public void setOthMon1(MonthsReturn othMon1) {
+    public void setOthMon1(NetGains othMon1) {
         this.othMon1 = othMon1;
     }
 
-    public MonthsReturn getOthMon2() {
+    public NetGains getOthMon2() {
         return othMon2;
     }
 
-    public void setOthMon2(MonthsReturn othMon2) {
+    public void setOthMon2(NetGains othMon2) {
         this.othMon2 = othMon2;
     }
 
-    public MonthsReturn getOthMon3() {
+    public NetGains getOthMon3() {
         return othMon3;
     }
 
-    public void setOthMon3(MonthsReturn othMon3) {
+    public void setOthMon3(NetGains othMon3) {
         this.othMon3 = othMon3;
     }
 
-    public List<MonthlyTotReturn> getMonthlyTotReturns() {
-        return monthlyTotReturns;
+    public List<MonthlyClassPercentReturns> getMonthlyTotReturns() {
+        return monthlyClassPercentReturns;
     }
 
-    public void setMonthlyTotReturns(List<MonthlyTotReturn> monthlyTotReturns) {
-        this.monthlyTotReturns = monthlyTotReturns;
+    public void setMonthlyTotReturns(List<MonthlyClassPercentReturns> monthlyClassPercentReturns) {
+        this.monthlyClassPercentReturns = monthlyClassPercentReturns;
     }
 
     public MonthlyReturnCats getMonthlyReturnCats() {

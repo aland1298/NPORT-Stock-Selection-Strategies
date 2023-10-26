@@ -35,7 +35,7 @@ public class EdgarManager {
 
     static {
         try {
-            FileHandler fileHandler = new FileHandler(EdgarManager.class.getName());
+            FileHandler fileHandler = new FileHandler("src\\main\\java\\logs\\" + EdgarManager.class.getName());
             logger.addHandler(fileHandler);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -82,7 +82,7 @@ public class EdgarManager {
      * @param accessionNumber The unique accession number associated with the NPORT-P filing.
      * @return An instance of the NPORT_P class representing the parsed NPORT-P data, or null if the request fails.
      */
-    public static NPORT_P getNPORT_P(final String cik, final String accessionNumber) {
+    public static NPORT_P getNPORT_P(final int cik, final String accessionNumber) {
         try {
             // Create an HTTP request
             HttpRequest request = HttpRequest.newBuilder()
@@ -105,8 +105,9 @@ public class EdgarManager {
             }
 
         } catch (Exception e) {
+            System.out.println("ERROR: " + e);
             // If an exception occurs during the request or response handling, throw an IOException with an error message.
-            logger.warning("An error occurred while processing CIK " + cik + "and Accession " + accessionNumber);
+            logger.warning("An error occurred while processing CIK " + cik + " and Accession " + accessionNumber);
         }
 
         return null;

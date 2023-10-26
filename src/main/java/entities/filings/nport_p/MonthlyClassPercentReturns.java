@@ -2,7 +2,7 @@ package entities.filings.nport_p;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-public class MonthlyTotReturn {
+public class MonthlyClassPercentReturns {
     private String classId;
     @JacksonXmlProperty(localName = "rtn1")
     private Double month1;
