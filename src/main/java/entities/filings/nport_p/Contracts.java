@@ -4,11 +4,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class Contracts {
     @JacksonXmlProperty(localName = "mon1")
-    private MonthsReturn month1;
+    private NetGains month1;
     @JacksonXmlProperty(localName = "mon2")
-    private MonthsReturn month2;
+    private NetGains month2;
     @JacksonXmlProperty(localName = "mon3")
-    private MonthsReturn month3;
+    private NetGains month3;
     @JacksonXmlProperty(localName = "forwardCategory")
     private Category forward;
     @JacksonXmlProperty(localName = "futureCategory")
@@ -19,32 +19,32 @@ public class Contracts {
     private Category swaption;
     @JacksonXmlProperty(localName = "swapCategory")
     private Category swap;
-    @JacksonXmlProperty(localName = "warrentCategory")
-    private Category warrent;
+    @JacksonXmlProperty(localName = "warrantCategory")
+    private Category warrant;
     @JacksonXmlProperty(localName = "otherCategory")
     private Category other;
 
-    public MonthsReturn getMonth1() {
+    public NetGains getMonth1() {
         return month1;
     }
 
-    public void setMonth1(MonthsReturn month1) {
+    public void setMonth1(NetGains month1) {
         this.month1 = month1;
     }
 
-    public MonthsReturn getMonth2() {
+    public NetGains getMonth2() {
         return month2;
     }
 
-    public void setMonth2(MonthsReturn month2) {
+    public void setMonth2(NetGains month2) {
         this.month2 = month2;
     }
 
-    public MonthsReturn getMonth3() {
+    public NetGains getMonth3() {
         return month3;
     }
 
-    public void setMonth3(MonthsReturn month3) {
+    public void setMonth3(NetGains month3) {
         this.month3 = month3;
     }
 
@@ -89,11 +89,11 @@ public class Contracts {
     }
 
     public Category getWarrent() {
-        return warrent;
+        return warrant;
     }
 
-    public void setWarrent(Category warrent) {
-        this.warrent = warrent;
+    public void setWarrant(Category warrant) {
+        this.warrant = warrant;
     }
 
     public Category getOther() {

@@ -11,7 +11,7 @@ public class GenInfo {
     private Date fiscalPdEnd;
     @JacksonXmlProperty(localName = "repPdDate")
     private Date reported;
-    private Boolean isFinalFiling;
+    private String isFinalFiling;
 
     public String getSeriesName() {
         return seriesName;
@@ -45,11 +45,11 @@ public class GenInfo {
         this.reported = reported;
     }
 
-    public Boolean getFinalFiling() {
+    public String getIsFinalFiling() {
         return isFinalFiling;
     }
 
-    public void setFinalFiling(Boolean finalFiling) {
-        isFinalFiling = finalFiling;
+    public void setIsFinalFiling(String isFinalFiling) {
+        this.isFinalFiling = isFinalFiling;
     }
 }
