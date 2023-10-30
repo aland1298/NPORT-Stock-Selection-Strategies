@@ -5,36 +5,62 @@ import com.zaxxer.hikari.HikariDataSource;
 import entities.filings.NPORT_P;
 import entities.filings.nport_p.*;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
 
 /**
  * Establishes functionality to connect to database.
  */
 public class DbManager {
-    private static final HikariDataSource dataSource;
-    private static final Logger logger = Logger.getLogger(DbManager.class.getName());
+    private static HikariDataSource dataSource = null;
 
-    static {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(resourceBundle.getString("db.URI"));
-        config.setUsername(resourceBundle.getString("db.USERNAME"));
-        config.setPassword(resourceBundle.getString("db.PASSWORD"));
-        dataSource = new HikariDataSource(config);
+    private DbManager() {/* IGNORE */}
 
-        try {
-            FileHandler fileHandler = new FileHandler("src\\main\\java\\logs\\" + DbManager.class.getName());
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public static HikariConfig getDatasource() {
+        return dataSource;
     }
 
-    private DbManager() {}
+    /**
+     * Closes datasource and sets the variable to null.
+     */
+    public static void closeConnection() {
+        if (!isDatasource()) {
+            return;
+        }
+
+        dataSource.close();
+        dataSource = null;
+    }
+
+    public static void establishConnection(String url, String username, String password) {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(url);
+
+        if (username != null && password != null) {
+            config.setUsername(username);
+            config.setPassword(password);
+        }
+
+        try {
+            dataSource = new HikariDataSource(config);
+        } catch (Exception e) {
+            System.out.println("Failed to configure datasource.");
+            return;
+        }
+
+        if (!dataSource.isRunning()) {
+            System.out.println("Failed to connect to the database.");
+            return;
+        }
+
+        System.out.println("Successfully configured datasource.");
+        System.out.println("Url: " + url);
+        System.out.println("Status: " + dataSource.isRunning());
+    }
+
+    public static boolean isDatasource() {
+        return dataSource != null;
+    }
 
     public static void insertNPORTFilings(Map<Integer, List<String>> cikAccessionMap) throws SQLException {
         String insertNPORT_P = "insert into nport_p(accession_number) values (?);";
@@ -55,15 +81,18 @@ public class DbManager {
             connection.setAutoCommit(false);
 
             for (Map.Entry<Integer, List<String>> entry: cikAccessionMap.entrySet()) {
+                // For every investment company get filing
                 int cik = entry.getKey();
                 List<String> accessionNumbers = entry.getValue();
 
                 for (String accessionNumber: accessionNumbers) {
+                    // For every accession number query the filing
                     String formattedAccessionNumber = accessionNumber.replace("-", "");
 
                     // Query Edgar Manager to get NPORT_P filing data
                     NPORT_P nportP;
                     if ((nportP = EdgarManager.getNPORT_P(cik, formattedAccessionNumber)) != null) {
+                        // Insert NPORT filing into database
                         try {
                             // nport_p
                             prepareInsertNPORT_PStatement.setString(1, accessionNumber);
@@ -102,6 +131,7 @@ public class DbManager {
                             }
                             prepareInsertPortfolioInfoStatement.executeBatch();
 
+                            // Do not reorder, order matters when inserting into database due to foreign key constraints
                             insert3MonthInfo(connection, nportP.getFormData().getFundInfo(), accessionNumber);
                             insert3MonthClassInfo(connection, accessionNumber, nportP.getFormData().getFundInfo().getReturnInfo().getMonthlyTotReturns());
                             insert3MonthCategoryInfo(connection, accessionNumber, nportP.getFormData().getFundInfo().getReturnInfo().getMonthlyReturnCats());

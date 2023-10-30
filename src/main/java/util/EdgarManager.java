@@ -7,7 +7,6 @@ import entities.Submission;
 import entities.filings.NPORT_P;
 import enums.FilingType;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -16,8 +15,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
 
 /**
  * Establishes functionalities to query the Edgar database. NO THREAD SAFE
@@ -27,20 +24,10 @@ public class EdgarManager {
     private static final String BASE_ARCHIEVES_URL = "https://www.sec.gov/Archives/edgar/data/";
     private static final String USER_AGENT = "me@me123haha.com";
     private static final int MAX_REQUESTS_PER_SECOND = 10;
-    private static final Logger logger = Logger.getLogger(EdgarManager.class.getName());
 
     private static final HttpClient httpClient = HttpClient.newHttpClient();
 
     private EdgarManager() {/* IGNORED */}
-
-    static {
-        try {
-            FileHandler fileHandler = new FileHandler("src\\main\\java\\logs\\" + EdgarManager.class.getName());
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     /**
      * Retrieves submission data for a specified CIK (Central Index Key) from the Submission API.
@@ -65,11 +52,11 @@ public class EdgarManager {
                 return JSON.std.beanFrom(Submission.class, response.body());
             } else {
                 // If the response status code is not 200, throw an IOException with an error message.
-                logger.warning("Failed to retrieve data for CIK " + cik + ". HTTP Status Code: " + response.statusCode());
+                System.err.println("Failed to retrieve data for CIK " + cik + ". HTTP Status Code: " + response.statusCode());
             }
         } catch (Exception e) {
             // If an exception occurs during the request or response handling, throw an IOException with an error message.
-            logger.warning("An error occurred while processing CIK " + cik);
+            System.err.println("An error occurred while processing CIK " + cik);
         }
 
         return null;
@@ -101,13 +88,12 @@ public class EdgarManager {
                 return xmlMapper.readValue(response.body(), NPORT_P.class);
             } else {
                 // If the response status code is not 200, throw an IOException with an error message.
-                logger.warning("Failed to retrieve data for CIK " + cik + " and Accession " + accessionNumber + ". HTTP Status Code: " + response.statusCode());
+                System.err.println("Failed to retrieve data for CIK " + cik + " and Accession " + accessionNumber + ". HTTP Status Code: " + response.statusCode());
             }
 
         } catch (Exception e) {
-            System.out.println("ERROR: " + e);
             // If an exception occurs during the request or response handling, throw an IOException with an error message.
-            logger.warning("An error occurred while processing CIK " + cik + " and Accession " + accessionNumber);
+            System.err.println("An error occurred while processing CIK " + cik + " and Accession " + accessionNumber);
         }
 
         return null;

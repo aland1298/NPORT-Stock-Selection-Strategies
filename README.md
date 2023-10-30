@@ -7,23 +7,40 @@
 **Recent Updates:**
 - Published updated MySQL schema into **/sql_info
 - Created code for updating database with data
+- Started How-to for setting up db
+- Created interface for managing program
 
 **TODO:**
-1. Test code for updating database
-2. Remove default value data from inserting into database to save space
-3. Create throttle for pulling data from sec website (max 10/sec according to spec)
-4. Finish creating cmd for managing the program
-5. Create "How To" section
+1. Remove default value data from inserting into database to save space
+2. Create throttle for pulling data from sec website (max 10/sec according to spec)
+3. Create task _db init_
 
-**Research Proposition:**
+**Instructions**
+-
+This section will give you directions on how you can use this program on your own following the instructions
+on how this project was configured by me. I would highly recommend following the ordering outlined below.
+1. **Initiate the database fixed table types:** Ensure that you have created the database beforehand by running _**/sql_info/script-{version#}v.sql_
+   1. Run task _db init_.
+2. **Query the CIK number of all registered investment companies under the Investment Company Act of 1940 who file form NPORT-P.**
+   1. Datasets are provided in _**/invst_comp_40_dataset_ folder.
+3. **Insert (manually or programmatically) into _investment_company_ table every dataset and into the corresponding _open_ or _closed_ tables**.
+   1. _Closed-End Funds_
+      1. Insert into _investment_company_ table.
+      2. Insert _cik_ into _closed_ table.
+   2. _Open-End Funds_: It is recommended to insert the dataset by the organization type to ensure the correct data is inserted into both _investment_company_ and _open_ tables.
+      1. Insert into _investment_company_ table.
+      2. Insert _cik_, _org_type_ into open table. 
+4. **TODO**
 
+**Research Proposition**
+-
 To explore and evaluate the effectiveness of an equal-weighted portfolio construction methodology as a potential stock selection strategy for generating alpha in the context of mutual funds and investment companies registered under the Investment Company Act of 1940. This research aims to assess whether this methodology consistently outperforms the majority of funds in terms of returns.
 
 **Research Question:**
 
 What is the comparative performance of an equal-weighted portfolio constructed from the top 10 securities, based on the sum of the total portfolio investment in each security for each fund during a specified period, against the investment strategies employed by a sample of mutual funds registered under the Investment Company Act of 1940? Can this methodology consistently generate higher alpha than the majority of these funds over the same reporting periods?
 
-**PROCESS:**
+**Process:**
 
 _1. Data Collection:_
   - Retrieve historical data on the portfolio holdings of mutual funds registered under the Investment Company Act of 1940 from the SEC.gov database, specifically from Form N-PORT filings.
@@ -52,4 +69,16 @@ _7. Discussion and Implications:_
   - Consider the limitations of methodology and potential areas for future research.
 
 _9. Rinse and repeat with other strategies_
+
+**Resources**
+-
+Closed-End Investment Company Dataset (https://www.sec.gov/open/datasets-closed-end-investment_company)
+
+Open-End Investment Company Dataset (https://www.sec.gov/open/datasets-investment_company)
+
+NPORT Filing Reference Guide (https://www.sec.gov/files/formn-port.pdf)
+
+Edgar Archives API (https://www.sec.gov/os/accessing-edgar-data)
+
+Edgar Submissions API (https://www.sec.gov/edgar/sec-api-documentation)
 

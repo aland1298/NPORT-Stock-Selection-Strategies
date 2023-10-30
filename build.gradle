@@ -16,6 +16,7 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'com.zaxxer:HikariCP:5.0.1'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0'
+
 }
 
 test {
